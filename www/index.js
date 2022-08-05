@@ -50,44 +50,82 @@ function init() {
 
 	var matrix = new THREE.Matrix4();
 
-	var pxGeometry = new THREE.PlaneBufferGeometry( 100, 100 );
-	pxGeometry.attributes.uv.array[ 1 ] = 0.5;
-	pxGeometry.attributes.uv.array[ 3 ] = 0.5;
-	pxGeometry.rotateY( Math.PI / 2 );
-	pxGeometry.translate( 50, 0, 0 );
+	// var pxGeometry = new THREE.PlaneGeometry( 100, 100 );
+	// pxGeometry.attributes.uv.array[ 1 ] = 0.5;
+	// pxGeometry.attributes.uv.array[ 3 ] = 0.5;
+	// pxGeometry.rotateY( Math.PI / 2 );
+	// pxGeometry.translate( 50, 0, 0 );
+	//
+	// var nxGeometry = new THREE.PlaneGeometry( 100, 100 );
+	// nxGeometry.attributes.uv.array[ 1 ] = 0.5;
+	// nxGeometry.attributes.uv.array[ 3 ] = 0.5;
+	// nxGeometry.rotateY( - Math.PI / 2 );
+	// nxGeometry.translate( - 50, 0, 0 );
+	//
+	// var pzGeometry = new THREE.PlaneGeometry( 100, 100 );
+	// pzGeometry.attributes.uv.array[ 1 ] = 0.5;
+	// pzGeometry.attributes.uv.array[ 3 ] = 0.5;
+	// pzGeometry.translate( 0, 0, 50 );
+	//
+	// var nzGeometry = new THREE.PlaneGeometry( 100, 100 );
+	// nzGeometry.attributes.uv.array[ 1 ] = 0.5;
+	// nzGeometry.attributes.uv.array[ 3 ] = 0.5;
+	// nzGeometry.rotateY( Math.PI );
+	// nzGeometry.translate( 0, 0, -50 );
+	//
+	// var pyGeometry = new THREE.PlaneGeometry( 100, 100 );
+	// pyGeometry.attributes.uv.array[ 5 ] = 0.5;
+	// pyGeometry.attributes.uv.array[ 7 ] = 0.5;
+	// pyGeometry.rotateX( - Math.PI / 2 );
+	// pyGeometry.translate( 0, 50, 0 );
 
-	var nxGeometry = new THREE.PlaneBufferGeometry( 100, 100 );
-	nxGeometry.attributes.uv.array[ 1 ] = 0.5;
-	nxGeometry.attributes.uv.array[ 3 ] = 0.5;
+	var uv_array = new Float32Array([
+		 0.5, 100, 0.5,
+		 100, 100, 100,
+		 100, 100, 100
+	 ]);
+	 var uv_array_2 = new Float32Array([
+	 	 100, 100, 100,
+	 	 100, 0.5, 100,
+	 	 0.5, 100, 100
+	  ]);
+
+  var pxGeometry = new THREE.PlaneGeometry(100, 100);
+	pxGeometry.setAttribute('uv', new THREE.BufferAttribute(uv_array, 3) );
+	pxGeometry.rotateY( Math.PI / 2 );
+	pxGeometry.translate(50, 0, 0);
+
+	var nxGeometry = new THREE.PlaneGeometry( 100, 100 );
+	nxGeometry.setAttribute('uv', new THREE.BufferAttribute(uv_array, 3) );
 	nxGeometry.rotateY( - Math.PI / 2 );
 	nxGeometry.translate( - 50, 0, 0 );
 
-	var pyGeometry = new THREE.PlaneBufferGeometry( 100, 100 );
-	pyGeometry.attributes.uv.array[ 5 ] = 0.5;
-	pyGeometry.attributes.uv.array[ 7 ] = 0.5;
-	pyGeometry.rotateX( - Math.PI / 2 );
-	pyGeometry.translate( 0, 50, 0 );
-
-	var pzGeometry = new THREE.PlaneBufferGeometry( 100, 100 );
-	pzGeometry.attributes.uv.array[ 1 ] = 0.5;
-	pzGeometry.attributes.uv.array[ 3 ] = 0.5;
+	var pzGeometry = new THREE.PlaneGeometry( 100, 100 );
+	pzGeometry.setAttribute('uv', new THREE.BufferAttribute(uv_array, 3) );
 	pzGeometry.translate( 0, 0, 50 );
 
-	var nzGeometry = new THREE.PlaneBufferGeometry( 100, 100 );
-	nzGeometry.attributes.uv.array[ 1 ] = 0.5;
-	nzGeometry.attributes.uv.array[ 3 ] = 0.5;
+	var nzGeometry = new THREE.PlaneGeometry( 100, 100 );
+	nzGeometry.setAttribute('uv', new THREE.BufferAttribute(uv_array, 3) );
 	nzGeometry.rotateY( Math.PI );
 	nzGeometry.translate( 0, 0, -50 );
 
-	//
+	var pyGeometry = new THREE.PlaneGeometry( 100, 100 );
+	pyGeometry.setAttribute('uv', new THREE.BufferAttribute(uv_array_2, 3) );
+	pyGeometry.rotateX( - Math.PI / 2 );
+	pyGeometry.translate( 0, 50, 0 );
 
 	// BufferGeometry cannot be merged yet.
-	var tmpGeometry = new THREE.Geometry();
-	var pxTmpGeometry = new THREE.Geometry().fromBufferGeometry( pxGeometry );
-	var nxTmpGeometry = new THREE.Geometry().fromBufferGeometry( nxGeometry );
-	var pyTmpGeometry = new THREE.Geometry().fromBufferGeometry( pyGeometry );
-	var pzTmpGeometry = new THREE.Geometry().fromBufferGeometry( pzGeometry );
-	var nzTmpGeometry = new THREE.Geometry().fromBufferGeometry( nzGeometry );
+	var tmpGeometry = new THREE.BufferGeometry();
+	// var pxTmpGeometry = new THREE.BufferGeometry().fromBufferGeometry( pxGeometry );
+	// var nxTmpGeometry = new THREE.BufferGeometry().fromBufferGeometry( nxGeometry );
+	// var pyTmpGeometry = new THREE.BufferGeometry().fromBufferGeometry( pyGeometry );
+	// var pzTmpGeometry = new THREE.BufferGeometry().fromBufferGeometry( pzGeometry );
+	// var nzTmpGeometry = new THREE.BufferGeometry().fromBufferGeometry( nzGeometry );
+	var pxTmpGeometry = pxGeometry;
+	var nxTmpGeometry = nxGeometry;
+	var pyTmpGeometry = pyGeometry;
+	var pzTmpGeometry = pzGeometry;
+	var nzTmpGeometry = nzGeometry;
 
 	for ( var z = 0; z < worldDepth; z ++ ) {
 
@@ -126,7 +164,8 @@ function init() {
 		}
 	}
 
-	var geometry = new THREE.BufferGeometry().fromGeometry( tmpGeometry );
+	// var geometry = new THREE.BufferGeometry().fromGeometry( tmpGeometry );
+	var geometry = tmpGeometry;
 	geometry.computeBoundingSphere();
 
 	var texture = new THREE.TextureLoader().load('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/minecraft/atlas.png');
